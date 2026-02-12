@@ -1,4 +1,9 @@
 package de.fom.project.geld;
 
-public class Geld {
+public abstract class Geld {
+    private double wert;
+
+    public Geld(double wert){
+        this.wert = wert;
+    }
 }
