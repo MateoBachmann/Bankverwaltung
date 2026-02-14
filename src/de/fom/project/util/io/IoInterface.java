@@ -14,5 +14,6 @@ public interface IoInterface {
     public double requestDouble(String message);
     public double requestDouble();
     public void output(String message);
+    public void clearOutput();
     public int menu(String titel,String[] optionen);
 }

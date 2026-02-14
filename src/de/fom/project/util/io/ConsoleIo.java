@@ -1,44 +1,44 @@
 package de.fom.project.util.io;
 
 import de.fom.project.util.exceptions.UnguelterWert;
-import de.fom.project.util.exceptions.UngueltigeEingabe;
 
 import java.util.Scanner;
 
 public class ConsoleIo implements IoInterface {
     private static Scanner scanner = new Scanner(System.in);
 
-    @Override
     public void output(String message) {
         System.out.println(message);
     }
     public double requestDouble(String message) throws UnguelterWert{
-        for (int i=0; i <=10; i++) {
+        while (true) {
+            System.out.println(message);
              try {
                 return scanner.nextDouble();
-
-
-             }catch (NumberFormatException e) {
+             }catch (Exception e) {
                  System.out.println("Ungültige Angabe bitte nochmal versuchen!");
              }
         }
-        throw new UngueltigeEingabe("Keine Gültige Angabe nach 10 versuchen!");
     }
-    public double requestDouble() throws UnguelterWert{
-        String line;
-        for (int i=0; i <=10; i++) {
+    public double requestDouble(){
+        while (true) {
             try {
                 return scanner.nextDouble();
 
-            }catch (NumberFormatException e) {
+            }catch (Exception e) {
                 System.out.println("Ungültige Angabe bitte nochmal versuchen");
             }
         }
-        throw new UngueltigeEingabe("Keine Gültige Angabe nach 10 versuchen");
     }
     public String requestString(String message){
         System.out.println(message);
         return scanner.nextLine();
+    }
+    // Nicht Schoen aber es funktioniert immer im Vergleich zu anderen methoden
+    public void clearOutput() {
+        for (int i=0; i <=50; i++) {
+            output("");
+        }
     }
 
     public String requestString(){
@@ -46,14 +46,18 @@ public class ConsoleIo implements IoInterface {
     }
 
     public int menu(String titel,String[] optionen){
-        System.out.println(titel);
-        for (int i=0;i < optionen.length;i++) {
-            System.out.println((i) + ". " + optionen[i]);
-        }
-        try{
-            return scanner.nextInt();
-        }catch (Exception e) {
-            return -1;
+        while(true) {
+            System.out.println(titel);
+            for (int i = 0; i < optionen.length; i++) {
+                System.out.println((i + 1) + ". " + optionen[i]);
+            }
+            try {
+                int answer = scanner.nextInt();
+                if (answer > 0 && answer <= optionen.length) {
+                    return answer;
+                }
+
+            } catch (Exception e) {}
         }
     }
 }

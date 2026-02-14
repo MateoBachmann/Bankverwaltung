@@ -1,6 +1,5 @@
 package de.fom.project.personen;
 
-import de.fom.project.util.exceptions.UngueltigeEingabe;
 import de.fom.project.util.exceptions.UngueltigesAlter;
 
 public abstract class Person {

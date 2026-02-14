@@ -6,12 +6,20 @@ public class Io {
     private static IoInterface io = new ConsoleIo(); // Hier kann enschieden werden welche Ausgabe (erweiterbarkeit)
 
 
-    public static <T> T requestInput(String message) {
-        return io.requestInput(message);
+    public static Double requestDouble(String message) {
+        return io.requestDouble(message);
     }
 
-    public static <T> T requestInput() {
-        return io.requestInput();
+    public static Double requestDouble() {
+        return io.requestDouble();
+    }
+
+    public static String requestString(String message) {
+        return io.requestString(message);
+    }
+
+    public static String requestString() {
+        return io.requestString();
     }
 
     public static void changeIo(IoInterface ioNew) {
@@ -20,5 +28,13 @@ public class Io {
 
     public static int getMenuSelection(String titel, String[] optionen) {
         return io.menu(titel,optionen);
+    }
+
+    public static void output(String message) {
+        io.output(message);
+    }
+
+    public static void clearOutput() {
+        io.clearOutput();
     }
 }
