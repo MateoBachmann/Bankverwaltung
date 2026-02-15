@@ -4,17 +4,23 @@ package de.fom.project.geld;
 
 import de.fom.project.personen.Kunde;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Konto {
     private double kontonr;
     private String iban;
     private DigitalesGeld wert;
     //private DigitalesGeld;
     private Kunde kunde;
+    private static Map<String, Konto> kontos = new HashMap<>();
 
     public Konto(Kunde kunde) {
         this.kunde = kunde;
         this.wert = new DigitalesGeld();
-
+        //generate Iban
+        this.iban = "";
+        this.kontos.put(this.iban, this);
     }
     public double getWert() {
         return wert.getWert();
@@ -22,6 +28,11 @@ public class Konto {
 
     protected void changeWert(double wert) {
         this.wert.changeWert(wert);
+    }
+
+
+    protected Konto getKonto(String iban) throws NullPointerException {
+        return kontos.get(iban);
     }
 
 
