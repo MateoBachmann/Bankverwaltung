@@ -14,6 +14,13 @@ public class Io {
         return io.requestDouble();
     }
 
+    public static int requestInt(String message) {
+        return io.requestInt(message);
+    }
+
+    public static int requestInt() {
+        return io.requestInt();
+    }
     public static String requestString(String message) {
         return io.requestString(message);
     }

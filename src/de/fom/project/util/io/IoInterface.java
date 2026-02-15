@@ -13,6 +13,8 @@ public interface IoInterface {
     public String requestString();
     public double requestDouble(String message);
     public double requestDouble();
+    public int requestInt(String message);
+    public int requestInt();
     public void output(String message);
     public void clearOutput();
     public int menu(String titel,String[] optionen);

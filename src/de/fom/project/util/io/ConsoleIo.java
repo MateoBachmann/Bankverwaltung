@@ -30,6 +30,26 @@ public class ConsoleIo implements IoInterface {
             }
         }
     }
+    public int requestInt(String message) throws UnguelterWert{
+        while (true) {
+            System.out.println(message);
+            try {
+                return scanner.nextInt();
+            }catch (Exception e) {
+                System.out.println("Ungültige Angabe bitte nochmal versuchen!");
+            }
+        }
+    }
+    public int requestInt(){
+        while (true) {
+            try {
+                return scanner.nextInt();
+
+            }catch (Exception e) {
+                System.out.println("Ungültige Angabe bitte nochmal versuchen");
+            }
+        }
+    }
     public String requestString(String message){
         System.out.println(message);
         return scanner.nextLine();
