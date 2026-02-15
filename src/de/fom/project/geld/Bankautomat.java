@@ -93,22 +93,22 @@ public class Bankautomat {
         double originalAmount = amount;
         List<Bargeld> scheine = new ArrayList<>();
         while (amount > 0) {
-            if (amount % 200 == 0 && getAnzahlScheineJeWert().get(200) >= 1){
+            if (amount > 200 && getAnzahlScheineJeWert().get(200) >= 1){
                 scheine.add(scheinAusgeben(200));
                 amount -= 200;
-            } else if (amount % 100 == 0 && getAnzahlScheineJeWert().get(100) >= 1) {
+            } else if (amount > 100 && getAnzahlScheineJeWert().get(100) >= 1) {
                 scheine.add(scheinAusgeben(100));
                 amount -= 100;
-            } else if (amount % 50 == 0 && getAnzahlScheineJeWert().get(50) >= 1) {
+            } else if (amount > 50 && getAnzahlScheineJeWert().get(50) >= 1) {
                 scheine.add(scheinAusgeben(50));
                 amount -= 50;
-            } else if (amount % 20 == 0 && getAnzahlScheineJeWert().get(20) >= 1) {
+            } else if (amount > 20 && getAnzahlScheineJeWert().get(20) >= 1) {
                 scheine.add(scheinAusgeben(20));
                 amount -= 20;
-            } else if (amount % 10 == 0 && getAnzahlScheineJeWert().get(10) >= 1) {
+            } else if (amount > 10 && getAnzahlScheineJeWert().get(10) >= 1) {
                 scheine.add(scheinAusgeben(10));
                 amount -= 10;
-            } else if (amount % 5 == 0 && getAnzahlScheineJeWert().get(5) >= 1) {
+            } else if (amount > 5 && getAnzahlScheineJeWert().get(5) >= 1) {
                 scheine.add(scheinAusgeben(5));
                 amount -= 5;
             } else {
