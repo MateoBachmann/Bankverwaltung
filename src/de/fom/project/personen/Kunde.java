@@ -2,10 +2,7 @@ package de.fom.project.personen;
 import de.fom.project.geld.Bargeld;
 import de.fom.project.geld.Konto;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Kunde extends Person {
     private double kundenNr;
@@ -21,12 +18,27 @@ public class Kunde extends Person {
         super(alter, name, geschlecht);
         this.kundenNr = kundenNr;
         kundenListe.put(kundenNr,this);
+
+
     }
     protected static Kunde getKundeVonNr(double kundenNr) throws Exception{
             return kundenListe.get(kundenNr);
 
     }
+    public double getKundenNr() {
+        return kundenNr;
+    }
 
+
+    public static void alleKundenAnzeigen() {
+        if (kundenListe.isEmpty()) {
+            System.out.println("Keine Kunden vorhanden.");
+            return;
+        }
+        for (Kunde k : kundenListe.values()) {
+            System.out.println("KundenNr: " + k.getKundenNr() + ", Name: " + Kunde.kundenListe);
+        }
+    }
     public Konto erstelleKonto(){
         Konto konto = new Konto(this);
         kontos.add(konto);
@@ -45,4 +57,9 @@ public class Kunde extends Person {
     public void bargeldEnfernen(List<Bargeld> scheine){
         bargeld.removeAll(scheine);
     }
-}
+
+
+
+    }
+
+

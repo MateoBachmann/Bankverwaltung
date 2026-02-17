@@ -6,11 +6,45 @@ import de.fom.project.geld.Konto;
 import de.fom.project.personen.Kunde;
 import de.fom.project.util.io.Io;
 
+import java.net.StandardSocketOptions;
+import java.util.Scanner;
+
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+
+
+
+
+
+
 public class Main {
 
 
+    public static void startmenu(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int kundeOderMitarbeiter = sc.nextInt();
+
+
+        while (true) {
+            System.out.println("Willkommen in unserer Bank");
+            System.out.println("Sind Sie:");
+            System.out.println("1 = Kunde");
+            System.out.println("2 = Mitarbeiter");
+
+
+            switch (kundeOderMitarbeiter) {
+                case 1:
+                   // MitarbeiterMenü();
+
+
+                switch (kundeOderMitarbeiter) {
+                    case 2:
+                        //BankautomatMenü();
+            }
+
+
+        }
+    }
 
     public static void main(String[] args) {
         while (true) {
