@@ -1,6 +1,7 @@
 package de.fom.project.personen;
 
 import de.fom.project.geld.Konto;
+import de.fom.project.util.exceptions.UngueltigesAlter;
 import de.fom.project.util.io.Io;
 
 import java.util.Scanner;
@@ -20,15 +21,20 @@ public class Mitarbeiter extends Person {
 
     }
     public Kunde kundeErstellen(){
-        double kundenNr = Io.requestDouble("KundenNummer angeben: ");
+        int kundenNr = Io.requestInt("KundenNummer angeben: ");
+        while(Kunde.getKundeVonNr(kundenNr) != null){
+            kundenNr = Io.requestInt("KundenNummer bereits belegt bitte waeheln Sie eine neue: ");
+        }
         String name = Io.requestString("Name angeben: ");
+
         String geschlecht = Io.requestString("Geschlecht angeben: ");
         int alter = Io.requestInt("Alter angeben: ");
-        return new Kunde(kundenNr,alter,name,geschlecht);
+        return new Kunde(kundenNr, alter, name, geschlecht);
+
     }
     public Konto kontoErstellen() {
         while (true) {
-            double kundenNr = Io.requestDouble("KundenNummer angeben: ");
+            int kundenNr = Io.requestInt("KundenNummer angeben: ");
             try {
                 Kunde kunde = Kunde.getKundeVonNr(kundenNr);
                 return kunde.erstelleKonto();
@@ -38,37 +44,36 @@ public class Mitarbeiter extends Person {
         }
 
     }
-    private void startmenu() {
-        Scanner sc = new Scanner(System.in);
-        int kundeOderMitarbeiter = sc.nextInt();
-
-
+    public void menu() {
+        String title = "Mitarbeiter Menu";
+        String[] optionen = {
+                "Alle Kunden Anzeigen",
+                "Kunden Erstellen",
+                "Konto Erstellen",
+                "Zurueck"
+        };
         while (true) {
-            System.out.println("Willkommen in unserer Bank");
-            System.out.println("Sind Sie:");
-            System.out.println("1 = Kunde");
-            System.out.println("2 = Mitarbeiter");
-
-
-            switch (kundeOderMitarbeiter) {
+            int menuAuswahl = Io.getMenuSelection(title, optionen);
+            switch (menuAuswahl) {
                 case 1:
-                    // MitarbeiterMenü();
+                    Kunde.alleKundenAnzeigen();
                     break;
-
-                case 2:
-
+                case 2: {
+                    try {
+                        kundeErstellen();
+                    } catch (UngueltigesAlter e) {
+                        Io.output(e.getMessage());
+                    }
                     break;
-
-
-
-
-
+                }
+                case 3:
+                    kontoErstellen();
+                    break;
+                case 4:
+                    return;
             }
-
-
         }
-
-}
+    }
 }
 
 

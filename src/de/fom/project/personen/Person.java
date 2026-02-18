@@ -20,4 +20,8 @@ public abstract class Person {
         //
         return alter >= 16;
     }
+
+    public String getName() {
+        return name;
+    }
 }

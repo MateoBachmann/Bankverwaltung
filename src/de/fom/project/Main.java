@@ -23,6 +23,9 @@ public class Main {
 
 
     public static void main(String[] args) {
+        Mitarbeiter nutzer = new Mitarbeiter(156156,"Stefan",566232,231,"Stefan","Männlich");
+        nutzer.menu();
+        System.exit(0);
         while (true) {
             Io.output("Banksimulation gestartet");
             Kunde testKunde = new Kunde(1234, 18, "Test Kunde", "Male");
@@ -43,7 +46,7 @@ public class Main {
 
         }
     }
-    Mitarbeiter Nutzer = new Mitarbeiter(156156,"Stefan",566232,231,"Stefan","Männlich");
+
 
 
 

@@ -14,19 +14,25 @@ public class ConsoleIo implements IoInterface {
         while (true) {
             System.out.println(message);
              try {
-                return scanner.nextDouble();
+                double returnValue = scanner.nextDouble();
+                scanner.nextLine();
+                return returnValue;
              }catch (Exception e) {
                  System.out.println("Ungültige Angabe bitte nochmal versuchen!");
+                 scanner.nextLine();
              }
         }
     }
     public double requestDouble(){
         while (true) {
             try {
-                return scanner.nextDouble();
+                double returnValue = scanner.nextDouble();
+                scanner.nextLine();
+                return returnValue;
 
             }catch (Exception e) {
                 System.out.println("Ungültige Angabe bitte nochmal versuchen");
+                scanner.nextLine();
             }
         }
     }
@@ -34,19 +40,25 @@ public class ConsoleIo implements IoInterface {
         while (true) {
             System.out.println(message);
             try {
-                return scanner.nextInt();
+                int returnValue = scanner.nextInt();
+                scanner.nextLine();
+                return returnValue;
             }catch (Exception e) {
                 System.out.println("Ungültige Angabe bitte nochmal versuchen!");
+                scanner.nextLine();
             }
         }
     }
     public int requestInt(){
         while (true) {
             try {
-                return scanner.nextInt();
+                int returnValue = scanner.nextInt();
+                scanner.nextLine();
+                return returnValue;
 
             }catch (Exception e) {
                 System.out.println("Ungültige Angabe bitte nochmal versuchen");
+                scanner.nextLine();
             }
         }
     }
@@ -71,13 +83,10 @@ public class ConsoleIo implements IoInterface {
             for (int i = 0; i < optionen.length; i++) {
                 System.out.println((i + 1) + ". " + optionen[i]);
             }
-            try {
-                int answer = scanner.nextInt();
-                if (answer > 0 && answer <= optionen.length) {
-                    return answer;
-                }
-
-            } catch (Exception e) {}
+            int answer = requestInt();
+            if (answer > 0 && answer <= optionen.length) {
+                return answer;
+            }
         }
     }
 }

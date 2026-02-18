@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Map;
 
 public class Bankautomat {
-    private Object menu;
     private Map<Integer,List<Bargeld>> bargeld = new HashMap<>();
     private Konto currentKonto;
     private Kunde currentKunde;
