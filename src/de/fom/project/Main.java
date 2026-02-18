@@ -5,6 +5,7 @@ import de.fom.project.geld.Bargeld;
 import de.fom.project.geld.Konto;
 import de.fom.project.personen.Kunde;
 import de.fom.project.personen.Mitarbeiter;
+import de.fom.project.util.exceptions.UngueltigesAlter;
 import de.fom.project.util.io.Io;
 
 import java.util.Scanner;
@@ -18,45 +19,44 @@ import java.util.Scanner;
 
 
 public class Main {
-
-
-
+    static Bankautomat testBankautomat = new Bankautomat();
+    static Mitarbeiter testMitarbeiter = new Mitarbeiter(1,"0",5000,26,"Max Mustermann","test");
 
     public static void main(String[] args) {
-        Mitarbeiter nutzer = new Mitarbeiter(156156,"Stefan",566232,231,"Stefan","Männlich");
-        nutzer.menu();
-        System.exit(0);
-        while (true) {
-            Io.output("Banksimulation gestartet");
-            Kunde testKunde = new Kunde(1234, 18, "Test Kunde", "Male");
-            testKunde.erstelleKonto();
-            Konto testKonto = testKunde.getKontos().getFirst();
+        String[] haubtMenu = {
+                "Mitarbeiter",      //1
+                "Kunde"             //2
+        };
+        while(true){
+            int menuAuswahl = Io.getMenuSelection("Willkommen in der Bank",haubtMenu);
+            switch (menuAuswahl) {
+                case 1:
+                    testMitarbeiter.menu();
+                    break;
+                case 2:
+                    //todo: hier noch Auswahl welcher Kunde
+                    Konto konto = null;
+                    Kunde kunde = null;
+                    testBankautomat.karteEinlesen(konto, kunde);
+                    testBankautomat.menu();
+                    break;
 
-            Bankautomat testBankautomat = new Bankautomat();
-            for (int i = 1; i <= 50; i++) {
-                int[] werte = {5, 10, 20, 50, 100, 200};
-                for (int wert : werte) {
-                    testBankautomat.bargeldHinzufuegen(new Bargeld(wert));
-                }
+
             }
-            testKonto.testChangeWert(50000);
-
-            testBankautomat.karteEinlesen(testKonto, testKunde);
-            break;
-
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
