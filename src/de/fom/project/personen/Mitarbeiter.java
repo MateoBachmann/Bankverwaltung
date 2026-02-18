@@ -36,41 +36,42 @@ public class Mitarbeiter extends Person {
                 Io.output("Kunde nicht gefunden");
             }
         }
-        class MitarbeiterMenü {
 
-            private Scanner sc = new Scanner(System.in);
-
-
-            public MitarbeiterMenü() {
-                boolean aktiv = true;
-
-                while (aktiv) {
-                    System.out.println("--- Kundenbereich ---");
-                    System.out.println("1 = Kunde anlegen");
-                    System.out.println("2 = Kunden anzeigen");
-                    System.out.println("0 = Programm beenden");
-
-                    int auswahl = sc.nextInt();
-
-                    switch (auswahl) {
-                        case 1:
-                            kundeErstellen();
-
-                        case 2:
-                            Kunde.alleKundenAnzeigen();
-                            break;
-                        case 0:
-                            aktiv = false;
-                            break;
-                        default:
-                            System.out.println("Ungültig");
-                    }
-                }
-            }
-
-            }
-        }
     }
+    private void startmenu() {
+        Scanner sc = new Scanner(System.in);
+        int kundeOderMitarbeiter = sc.nextInt();
+
+
+        while (true) {
+            System.out.println("Willkommen in unserer Bank");
+            System.out.println("Sind Sie:");
+            System.out.println("1 = Kunde");
+            System.out.println("2 = Mitarbeiter");
+
+
+            switch (kundeOderMitarbeiter) {
+                case 1:
+                    // MitarbeiterMenü();
+                    break;
+
+                case 2:
+
+                    break;
+
+
+
+
+
+            }
+
+
+        }
+
+}
+}
+
+
 
 
 
