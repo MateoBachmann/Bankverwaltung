@@ -24,7 +24,12 @@ public class Kunde extends Person {
         kundenListe.put(kundenNr,this);
     }
 
-    protected static Kunde getKundeVonNr(int kundenNr){
+    /***
+     * Könnte auch Protected sein, wird jedoch zu test zwecken in der main verwendet
+     * @param kundenNr
+     * @return
+     */
+    public static Kunde getKundeVonNr(int kundenNr){
         return kundenListe.getOrDefault(kundenNr, null);
 
     }
@@ -58,7 +63,7 @@ public class Kunde extends Person {
 
     /**
      * muss Public sein, damit der Bankautomat drauf zugreifen kann.
-     * Hier ist Public ansonsten nicht Sinfoll da so jede klasse dem kunden bargeld enfernen kann, jedoch war eine Transaktionsklasse nicht teil des Projektes
+     * Hier ist Public ansonsten nicht Sinvoll da so jede klasse dem kunden bargeld enfernen kann, jedoch war eine Transaktionsklasse nicht teil des Projektes
      */
     public void bargeldEnfernen(List<Bargeld> scheine){
         bargeld.removeAll(scheine);

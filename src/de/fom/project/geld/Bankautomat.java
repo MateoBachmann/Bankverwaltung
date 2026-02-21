@@ -41,7 +41,7 @@ public class Bankautomat {
 
 
 
-    private void menu(){
+    public void menu(){
         String[] haubtMenu = {
                 "Einzahlen", //1
                 "Auzahlen",//2

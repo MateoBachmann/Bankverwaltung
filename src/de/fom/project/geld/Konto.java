@@ -6,21 +6,28 @@ import de.fom.project.personen.Kunde;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 public class Konto {
-    private double kontonr;
-    private String iban;
+    private int kontonr;
     private DigitalesGeld wert;
     //private DigitalesGeld;
     private Kunde kunde;
-    private static Map<String, Konto> kontos = new HashMap<>();
+    private static Map<Integer, Konto> kontos = new HashMap<>();
 
     public Konto(Kunde kunde) {
         this.kunde = kunde;
         this.wert = new DigitalesGeld();
-        //generate Iban
-        this.iban = "";
-        this.kontos.put(this.iban, this);
+
+        while(true){
+            int zufalszahl = new Random().nextInt(1000);
+            if (!kontos.containsKey(zufalszahl)) {
+                this.kontonr = zufalszahl;
+                kontos.put(this.kontonr, this);
+                return;
+            }
+        }
+
     }
     public double getWert() {
         return wert.getWert();
@@ -31,8 +38,9 @@ public class Konto {
     }
 
 
-    protected Konto getKonto(String iban) throws NullPointerException {
-        return kontos.get(iban);
+
+    protected Konto getKonto(int kontonr) throws NullPointerException {
+        return kontos.get(kontonr);
     }
 
 
