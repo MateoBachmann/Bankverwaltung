@@ -35,7 +35,6 @@ public class Bankautomat {
     public void karteEinlesen(Konto konto, Kunde kunde) {
         currentKonto = konto;
         currentKunde = kunde;
-
         menu();
     }
 
@@ -45,12 +44,26 @@ public class Bankautomat {
         String[] haubtMenu = {
                 "Einzahlen", //1
                 "Auzahlen",//2
-                "Ueberweisung", //3
-                "Beenden" //4
+                "Ueberweisung",//3
+                "Guthaben Anzeigen", //4
+                "Beenden" //5
         };
         while(true){
             int auswahl = Io.getMenuSelection("Bankautomat\nIhr derzeitiges guthaben beträgt: " + Double.toString(currentKonto.getWert()) + "€",haubtMenu);
             if (auswahl == 1){
+                List<Bargeld> bargeldDesKunden = currentKunde.getBargeld();
+                List<String> optionen = new ArrayList<>();
+                for (Bargeld bargeld : bargeldDesKunden) {
+                    optionen.add(bargeld.getWert() + "€ Schein");
+                }
+                if (optionen.isEmpty()){
+                    Io.output("Du hast akutell kein Bargeld");
+                }else {
+                    int scheinIndex = Io.getMenuSelection("Schein auswaehlen", optionen.toArray(new String[0]));
+                    List<Bargeld> tmpList = new ArrayList<>();
+                    tmpList.add(bargeldDesKunden.get(scheinIndex-1));
+                    geldEinzahlen(tmpList);
+                }
 
             }else if (auswahl == 2){
                 Io.clearOutput();
@@ -61,8 +74,26 @@ public class Bankautomat {
                     Io.output(e.getMessage());
                 }
             }else if (auswahl == 3){
-
-            } else if (auswahl == 4){
+                Konto zielkonto = Konto.kontoAuswahl();
+                if (zielkonto != null && !zielkonto.equals(currentKonto)){
+                    double wert = Io.requestDouble("Wie viel willst du Ueberweisen: ");
+                    if (currentKonto.getWert() >= wert) {
+                        currentKonto.changeWert(-wert);
+                        zielkonto.changeWert(wert);
+                        Io.output("Uberweisung durchgefuehrt");
+                    }
+                }else{
+                    Io.output("Ungueltiges Zielkonto, eventuell aktuelles Konto ausgewaehlt?");
+                }
+            }else if (auswahl == 4){
+                Io.output("Aktuelles Guthaben auf Konto:" + currentKonto.getWert());
+                Io.output("Aktuelles Bargeld:");
+                if (currentKunde.getBargeld() != null && !currentKunde.getBargeld().isEmpty()) {
+                    for (Bargeld bargeld : currentKunde.getBargeld()) {
+                        Io.output(String.valueOf(bargeld.getWert()));
+                    }
+                }
+            } else if (auswahl == 5){
                 karteEntnemhen();
                 return;
             }
@@ -86,29 +117,29 @@ public class Bankautomat {
         }
     }
 
-    public List<Bargeld> geldAuzahlen(double amount) throws UnguelterWert {
+    public void geldAuzahlen(double amount) throws UnguelterWert {
         if ((amount < 0) || (amount % 5 != 0) || (amount > getGesamtwert()) || (amount >= currentKonto.getWert())){
             throw new UnguelterWert("Wert Ungueltig");
         }
         double originalAmount = amount;
         List<Bargeld> scheine = new ArrayList<>();
         while (amount > 0) {
-            if (amount > 200 && getAnzahlScheineJeWert().get(200) >= 1){
+            if (amount >= 200 && getAnzahlScheineJeWert().get(200) >= 1){
                 scheine.add(scheinAusgeben(200));
                 amount -= 200;
-            } else if (amount > 100 && getAnzahlScheineJeWert().get(100) >= 1) {
+            } else if (amount >= 100 && getAnzahlScheineJeWert().get(100) >= 1) {
                 scheine.add(scheinAusgeben(100));
                 amount -= 100;
-            } else if (amount > 50 && getAnzahlScheineJeWert().get(50) >= 1) {
+            } else if (amount >= 50 && getAnzahlScheineJeWert().get(50) >= 1) {
                 scheine.add(scheinAusgeben(50));
                 amount -= 50;
-            } else if (amount > 20 && getAnzahlScheineJeWert().get(20) >= 1) {
+            } else if (amount >= 20 && getAnzahlScheineJeWert().get(20) >= 1) {
                 scheine.add(scheinAusgeben(20));
                 amount -= 20;
-            } else if (amount > 10 && getAnzahlScheineJeWert().get(10) >= 1) {
+            } else if (amount >= 10 && getAnzahlScheineJeWert().get(10) >= 1) {
                 scheine.add(scheinAusgeben(10));
                 amount -= 10;
-            } else if (amount > 5 && getAnzahlScheineJeWert().get(5) >= 1) {
+            } else if (amount >= 5 && getAnzahlScheineJeWert().get(5) >= 1) {
                 scheine.add(scheinAusgeben(5));
                 amount -= 5;
             } else {
@@ -117,7 +148,8 @@ public class Bankautomat {
             }
         }
         currentKonto.changeWert(originalAmount * (-1));
-        return scheine;
+        currentKunde.getBargeld().addAll(scheine);
+        return ;
     }
 
 
@@ -127,7 +159,7 @@ public class Bankautomat {
         bargeld.get((int) schein.getWert()).add(schein);
     }
 
-
+    //diese Funktion wird im zuge des Projektes nicht durch denn Mitabreiter aufgerufen sondern per main einmalig aufgefüllt
     public void bargeldHinzufuegen(List<Bargeld> scheine){
         for (Bargeld schein : scheine) {
             bargeld.get((int) schein.getWert()).add(schein);

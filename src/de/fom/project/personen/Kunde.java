@@ -10,6 +10,12 @@ public class Kunde extends Person {
     private List<Konto> kontos = new ArrayList<>();
     private List<Bargeld> bargeld;
     private static Map<Integer,Kunde> kundenListe = new HashMap<>();
+
+    public List<Bargeld> getBargeld() {
+        return bargeld;
+    }
+
+
     public double getMitarbeiterNr() {
         return kundenNr;
     }
@@ -21,6 +27,7 @@ public class Kunde extends Person {
             throw new IllegalArgumentException("Kundennummer vorhanden");
         }
         this.kundenNr = kundenNr;
+        this.bargeld = new ArrayList<>();
         kundenListe.put(kundenNr,this);
     }
 

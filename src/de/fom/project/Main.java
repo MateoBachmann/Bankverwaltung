@@ -25,15 +25,18 @@ public class Main {
     static Mitarbeiter testMitarbeiter = new Mitarbeiter(1,"0",5000,26,"Max Mustermann","test");
 
     public static void main(String[] args) {
+        int[] moeglicheWerte = {5,10,20,50,100,200};
+        List<Bargeld> bargeld = new ArrayList<>();
+        for (int wert : moeglicheWerte) {
+            for (int i = 0; i < 100; i++){
+                bargeld.add(new Bargeld(wert));
+            }
+        }
+        testBankautomat.bargeldHinzufuegen(bargeld);
         Kunde testKunde = new Kunde(1,18,"Test Kunde 1", "Testkunde");
-        testKunde.erstelleKonto();
-        Kunde testKunde2 = new Kunde(1,20,"Test Kunde 2", "Testkunde");
-        testKunde2.erstelleKonto();
-
-
-
-
-
+        testKunde.erstelleKonto().testChangeWert(50000);
+        Kunde testKunde2 = new Kunde(2,20,"Test Kunde 2", "Testkunde");
+        testKunde2.erstelleKonto().testChangeWert(1000000);
         String[] haubtMenu = {
                 "Mitarbeiter",      //1
                 "Kunde",             //2
@@ -81,7 +84,7 @@ public class Main {
         String title = "Bitte ein Konto auswählen";
         List<String> options = new ArrayList<String>();
         for (Konto k : moeglicheKonten) {
-            options.add(k.getIban()+ " " + k.getWert() + "€");
+            options.add(k.getKontonr()+ " " + k.getWert() + "€");
         }
         if  (options.size() == 0) {
             return null;

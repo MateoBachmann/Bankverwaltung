@@ -10,12 +10,7 @@ public class Bargeld extends Geld{
     public Bargeld(int wert) throws UnguelterWert {
         super(wert);
         boolean allowed = switch (wert) {
-            case 5 -> true;
-            case 10 -> true;
-            case 20 -> true;
-            case 50 -> true;
-            case 100 -> true;
-            case 200 -> true;
+            case 5, 10, 20, 50, 100, 200 -> true;
             default -> false;
         };
         if (!allowed) {
