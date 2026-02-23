@@ -40,7 +40,7 @@ public class Kunde extends Person {
         return kundenListe.getOrDefault(kundenNr, null);
 
     }
-    public double getKundenNr() {
+    public int getKundenNr() {
         return kundenNr;
     }
 

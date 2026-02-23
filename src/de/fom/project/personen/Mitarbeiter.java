@@ -68,6 +68,7 @@ public class Mitarbeiter extends Person {
                 }
                 case 3:
                     kontoErstellen();
+                    Io.output("Konto Erstellt");
                     break;
                 case 4:
                     return;
