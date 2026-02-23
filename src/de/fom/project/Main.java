@@ -86,7 +86,7 @@ public class Main {
         for (Konto k : moeglicheKonten) {
             options.add(k.getKontonr()+ " " + k.getWert() + "€");
         }
-        if  (options.size() == 0) {
+        if  (options.isEmpty()) {
             return null;
         }
         int auswahl = Io.getMenuSelection(title,options.toArray(new String[0]));

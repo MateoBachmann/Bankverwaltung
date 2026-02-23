@@ -41,7 +41,7 @@ public class Bankautomat {
 
 
     public void menu(){
-        String[] haubtMenu = {
+        String[] hautMenu = {
                 "Einzahlen", //1
                 "Auzahlen",//2
                 "Ueberweisung",//3
@@ -49,7 +49,7 @@ public class Bankautomat {
                 "Beenden" //5
         };
         while(true){
-            int auswahl = Io.getMenuSelection("Bankautomat\nIhr derzeitiges guthaben beträgt: " + Double.toString(currentKonto.getWert()) + "€",haubtMenu);
+            int auswahl = Io.getMenuSelection("Bankautomat\nIhr derzeitiges guthaben beträgt: " + Double.toString(currentKonto.getWert()) + "€",hautMenu);
             if (auswahl == 1){
                 List<Bargeld> bargeldDesKunden = currentKunde.getBargeld();
                 List<String> optionen = new ArrayList<>();
