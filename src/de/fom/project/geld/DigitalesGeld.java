@@ -6,6 +6,7 @@ public class DigitalesGeld extends Geld {
         super(0);
     }
 
+    //könnte auch weggelassen werden, jedoch wird hier die Überschreibung von Methoden verwendet
     public double getWert(){
         return super.getWert();
     }

@@ -153,12 +153,6 @@ public class Bankautomat {
     }
 
 
-
-
-    public void bargeldHinzufuegen(Bargeld schein){
-        bargeld.get((int) schein.getWert()).add(schein);
-    }
-
     //diese Funktion wird im zuge des Projektes nicht durch denn Mitabreiter aufgerufen sondern per main einmalig aufgefüllt
     public void bargeldHinzufuegen(List<Bargeld> scheine){
         for (Bargeld schein : scheine) {
@@ -188,17 +182,6 @@ public class Bankautomat {
             total += wert * getAnzahlScheineJeWert().get(wert);
         }
         return total;
-    }
-
-
-
-
-    public List<Bargeld> getBargeld() {
-        List<Bargeld> alleScheine = new ArrayList<>();
-        for (List<Bargeld> scheine : bargeld.values()) {
-            alleScheine.addAll(scheine);
-        }
-        return alleScheine;
     }
 
 }

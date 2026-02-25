@@ -43,13 +43,7 @@ public class Konto {
     }
 
 
-
-    protected Konto getKonto(int kontonr) throws NullPointerException {
-        return kontos.get(kontonr);
-    }
-
-
-    //    // Diese Methode gibt es nur für Testzwecke da ansonsten kein geld auf kontos erstellt werden kann, in einem echtbetrieb müsste diese Methode enfernt werden
+    // Diese Methode gibt es nur für Testzwecke da ansonsten kein geld auf kontos erstellt werden kann, in einem echtbetrieb müsste diese Methode enfernt werden
     public void testChangeWert(int wert) {
         this.wert.changeWert(wert);
     }

@@ -16,14 +16,9 @@ public class Kunde extends Person {
     }
 
 
-    public double getMitarbeiterNr() {
-        return kundenNr;
-    }
-
-
     public Kunde(int kundenNr, int alter, String name, String geschlecht){
         super(alter, name, geschlecht);
-        if (kundenListe.containsKey(kundenNr)){
+        if (kundenListe.containsKey(kundenNr) || kundenNr <= 0){
             throw new IllegalArgumentException("Kundennummer vorhanden");
         }
         this.kundenNr = kundenNr;
@@ -31,11 +26,8 @@ public class Kunde extends Person {
         kundenListe.put(kundenNr,this);
     }
 
-    /***
-     * Könnte auch Protected sein, wird jedoch zu test zwecken in der main verwendet
-     * @param kundenNr
-     * @return
-     */
+
+     // Könnte auch Protected sein, wird jedoch zu anschaungszwecken in der main verwendet
     public static Kunde getKundeVonNr(int kundenNr){
         return kundenListe.getOrDefault(kundenNr, null);
 

@@ -6,11 +6,11 @@ public class Io {
     private static IoInterface io = new ConsoleIo(); // Hier kann enschieden werden welche Ausgabe (erweiterbarkeit)
 
 
-    public static Double requestDouble(String message) {
+    public static double requestDouble(String message) {
         return io.requestDouble(message);
     }
 
-    public static Double requestDouble() {
+    public static double requestDouble() {
         return io.requestDouble();
     }
 
