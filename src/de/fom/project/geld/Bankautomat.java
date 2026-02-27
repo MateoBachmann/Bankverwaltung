@@ -118,7 +118,7 @@ public class Bankautomat {
     }
 
     public void geldAuzahlen(double amount) throws UnguelterWert {
-        if ((amount < 0) || (amount % 5 != 0) || (amount > getGesamtwert()) || (amount >= currentKonto.getWert())){
+        if ((amount < 0) || (amount % 5 != 0) || (amount > getGesamtwert()) || (amount > currentKonto.getWert())){
             throw new UnguelterWert("Wert Ungueltig");
         }
         double originalAmount = amount;
